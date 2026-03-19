@@ -1,0 +1,9 @@
+- [x] Verify that the copilot-instructions.md file in the .github directory is created.
+- [x] Clarify Project Requirements
+- [x] Scaffold the Project
+- [x] Customize the Project
+- [x] Install Required Extensions (none required)
+- [x] Compile the Project (npm install + client build)
+- [x] Create and Run Task (not needed; skipped)
+- [x] Launch the Project (use dev scripts in README)
+- [x] Ensure Documentation is Complete
