@@ -29,17 +29,36 @@ export default function ProductsPage() {
     const [qty, setQty] = useState('');
     const [localPlacing, setLocalPlacing] = useState(false);
 
-    // Get default image based on category and product name
+    // Get unique image for each product based on name and category
     function getProductImage() {
       if (product.image) return product.image;
       
-      const imageMap = {
+      // Map specific products to different images
+      const productImageMap = {
+        'JSW': 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=400&h=300&fit=crop',
+        'Ultra Gold': 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=300&fit=crop',
+        'Ramco': 'https://images.unsplash.com/photo-1537981609045-d5cfb2eeb359?w=400&h=300&fit=crop',
+        'Ultratech': 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=300&fit=crop',
+        'Bell': 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=400&h=300&fit=crop',
+        'Asian Paints': 'https://images.unsplash.com/photo-1562259949-e8e7689d7828?w=400&h=300&fit=crop',
+        'Sintex': 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=300&fit=crop',
+      };
+      
+      // Check if product name contains any key
+      for (const [key, url] of Object.entries(productImageMap)) {
+        if (product.name.toUpperCase().includes(key.toUpperCase())) {
+          return url;
+        }
+      }
+      
+      // Category-based fallback
+      const categoryImageMap = {
         cement: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=300&fit=crop',
         steel: 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=400&h=300&fit=crop',
         tiles: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=400&h=300&fit=crop',
         other: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=300&fit=crop'
       };
-      return imageMap[product.category] || imageMap.other;
+      return categoryImageMap[product.category] || categoryImageMap.other;
     }
 
     const total = qty ? (Number(product.price) * Number(qty)).toFixed(2) : '0.00';
