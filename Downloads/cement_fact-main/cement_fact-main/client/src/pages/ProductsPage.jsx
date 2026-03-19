@@ -29,6 +29,19 @@ export default function ProductsPage() {
     const [qty, setQty] = useState('');
     const [localPlacing, setLocalPlacing] = useState(false);
 
+    // Get default image based on category and product name
+    function getProductImage() {
+      if (product.image) return product.image;
+      
+      const imageMap = {
+        cement: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=300&fit=crop',
+        steel: 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=400&h=300&fit=crop',
+        tiles: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=400&h=300&fit=crop',
+        other: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=300&fit=crop'
+      };
+      return imageMap[product.category] || imageMap.other;
+    }
+
     const total = qty ? (Number(product.price) * Number(qty)).toFixed(2) : '0.00';
 
     async function placeOrder() {
@@ -68,8 +81,7 @@ export default function ProductsPage() {
     return (
       <div className="product-card" key={product._id}>
         <div className="product-image">
-          {/* Placeholder image area - replace with real images later */}
-          <div>{product.name}</div>
+          <img src={getProductImage()} alt={product.name} />
         </div>
         <div className="product-meta">
           <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
