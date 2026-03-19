@@ -58,9 +58,11 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="card auth-card">
-      <h2>{mode === 'login' ? 'Welcome Back' : 'Create Account'}</h2>
-      <p>Access your dashboard to manage products and orders.</p>
+    <div className="login-container">
+      <div className="login-background"></div>
+      <div className="card auth-card">
+        <h2>{mode === 'login' ? 'Welcome Back' : 'Create Account'}</h2>
+        <p>Access your dashboard to manage products and orders.</p>
       <form onSubmit={handleSubmit}>
         {mode === 'register' && (
           <>
@@ -126,6 +128,8 @@ export default function LoginPage() {
       >
         {mode === 'login' ? 'Need an account? Register' : 'Already have an account? Login'}
       </button>
+      </div>
+    </div>
     </div>
   );
 }

@@ -367,6 +367,53 @@ input, select, textarea {
   padding: 0 16px;
 }
 
+/* Login Page Background */
+.login-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  overflow: hidden;
+  z-index: -1;
+}
+
+.login-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('/arm_background_image.avif');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  z-index: -1;
+}
+
+.login-background::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(22, 27, 34, 0.75) 0%, rgba(15, 23, 42, 0.85) 100%);
+  z-index: 1;
+}
+
+.login-container .auth-card {
+  position: relative;
+  z-index: 10;
+  max-width: 420px;
+  margin: 0;
+  padding: 32px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+}
+
 @media (max-width: 720px) {
   .navbar { flex-direction: column; gap: 12px; align-items: flex-start; }
   .nav-links { flex-wrap: wrap; }
