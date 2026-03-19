@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link, Route, Routes, useNavigate, useLocation } from 'react-router-dom';
+import { Link, Route, Routes, useNavigate } from 'react-router-dom';
 import { useAuth } from './state/AuthContext';
 import { attachToken } from './api/client';
 import LoginPage from './pages/LoginPage';
@@ -15,7 +15,6 @@ import AdminUsersPage from './pages/AdminUsersPage';
 export default function App() {
   const { isAuthenticated, user, logout, token } = useAuth();
   const navigate = useNavigate();
-  const location = useLocation();
   const [theme, setTheme] = useState(() => {
     try {
       return localStorage.getItem('theme') || 'light';
@@ -23,8 +22,6 @@ export default function App() {
       return 'light';
     }
   });
-
-  const isLoginPage = location.pathname === '/login';
 
   useEffect(() => {
     attachToken(token);
@@ -42,42 +39,40 @@ export default function App() {
 
   return (
     <div className="app-shell">
-      {!isLoginPage && (
-        <nav className="navbar">
-          <div className="brand">A.R.M & CO Retails of Cement & Steel</div>
+      <nav className="navbar">
+        <div className="brand">A.R.M & CO Retails of Cement & Steel</div>
 
-          <div className="nav-links">
-            <Link className="btn" to="/">Products</Link>
-            <Link className="btn" to="/about">About us</Link>
-            {isAuthenticated && (
-              <>
-                <Link className="btn" to="/orders">Orders</Link>
-                {user?.role === 'admin' && (
-                  <>
-                    <Link className="btn" to="/admin/products">Add Product</Link>
-                    <Link className="btn" to="/admin/users">Manage User</Link>
-                  </>
-                )}
-              </>
-            )}
-          </div>
+        <div className="nav-links">
+          <Link className="btn" to="/">Products</Link>
+          <Link className="btn" to="/about">About us</Link>
+          {isAuthenticated && (
+            <>
+              <Link className="btn" to="/orders">Orders</Link>
+              {user?.role === 'admin' && (
+                <>
+                  <Link className="btn" to="/admin/products">Add Product</Link>
+                  <Link className="btn" to="/admin/users">Manage User</Link>
+                </>
+              )}
+            </>
+          )}
+        </div>
 
-          <button
-            className="btn btn-secondary"
-            title="Toggle theme"
-            onClick={() => setTheme((t) => (t === 'light' ? 'dark' : 'light'))}
-            style={{ marginLeft: 12 }}
-          >
-            {theme === 'light' ? '🌙' : '☀️'}
-          </button>
+        <button
+          className="btn btn-secondary"
+          title="Toggle theme"
+          onClick={() => setTheme((t) => (t === 'light' ? 'dark' : 'light'))}
+          style={{ marginLeft: 12 }}
+        >
+          {theme === 'light' ? '🌙' : '☀️'}
+        </button>
 
-          <Link className="user-icon" to={isAuthenticated ? '/profile' : '/login'} aria-label="user">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M12 12c2.761 0 5-2.239 5-5s-2.239-5-5-5-5 2.239-5 5 2.239 5 5 5zM3 20c0-3.866 3.582-7 9-7s9 3.134 9 7v1H3v-1z" fill="currentColor" />
-            </svg>
-          </Link>
-        </nav>
-      )}
+        <Link className="user-icon" to={isAuthenticated ? '/profile' : '/login'} aria-label="user">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 12c2.761 0 5-2.239 5-5s-2.239-5-5-5-5 2.239-5 5 2.239 5 5 5zM3 20c0-3.866 3.582-7 9-7s9 3.134 9 7v1H3v-1z" fill="currentColor" />
+          </svg>
+        </Link>
+      </nav>
 
       <Routes>
         <Route path="/login" element={<LoginPage />} />
@@ -116,7 +111,7 @@ export default function App() {
           }
         />
       </Routes>
-      {!isLoginPage && <Footer />}
+      <Footer />
     </div>
   );
 }
