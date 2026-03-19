@@ -389,7 +389,7 @@ input, select, textarea {
   height: 100%;
   background-image: url('/arm_background_image.avif');
   background-size: cover;
-  background-position: center;
+  background-position: left center;
   background-attachment: scroll;
   z-index: 0;
 }
@@ -401,7 +401,7 @@ input, select, textarea {
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(135deg, rgba(22, 27, 34, 0.5) 0%, rgba(15, 23, 42, 0.6) 100%);
+  background: linear-gradient(135deg, rgba(22, 27, 34, 0.25) 0%, rgba(15, 23, 42, 0.35) 100%);
   z-index: 1;
 }
 
