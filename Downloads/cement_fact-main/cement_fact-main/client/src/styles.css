@@ -419,14 +419,14 @@ input, select, textarea {
 .login-container {
   position: relative;
   width: 100%;
-  min-height: calc(100vh - 200px);
+  min-height: calc(100vh - 120px);
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-end;
   overflow: hidden;
   z-index: 1;
-  margin: 0 -20px;
-  padding: 40px 20px;
+  margin: 0;
+  padding: 40px 60px 40px 20px;
 }
 
 .login-background {
@@ -456,14 +456,15 @@ input, select, textarea {
 .login-container .auth-card {
   position: relative;
   z-index: 10;
-  max-width: 450px;
-  width: 100%;
-  padding: 40px;
-  background: rgba(17, 24, 39, 0.75);
-  backdrop-filter: blur(8px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 12px;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+  max-width: min(640px, 46vw);
+  width: min(640px, 46vw);
+  padding: 48px;
+  margin-right: 40px;
+  background: rgba(17, 24, 39, 0.7);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 14px;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6);
 }
 
 /* Responsive login container for tablets and mobile */
