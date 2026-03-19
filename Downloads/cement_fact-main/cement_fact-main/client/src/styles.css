@@ -39,7 +39,8 @@ a {
 .navbar {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
+  gap: 24px;
   padding: 16px 24px;
   background: var(--card);
   border: 1px solid var(--border);
@@ -53,19 +54,20 @@ a {
   font-size: 18px;
   font-weight: 700;
   letter-spacing: 0.5px;
+  white-space: nowrap;
+  margin-right: auto;
 }
-
-/* Ensure brand stays flush left and all other nav items group to the right */
-.navbar .brand { margin-right: auto; }
-
-.nav-links { display: flex; gap: 12px; align-items: center; }
-.nav-links .btn { white-space: nowrap; }
-.navbar .user-icon { margin-left: 10px; }
 
 .nav-links {
   display: flex;
   gap: 12px;
   align-items: center;
+  margin-left: auto;
+  margin-right: 12px;
+}
+
+.nav-links .btn {
+  white-space: nowrap;
 }
 
 .btn {
@@ -96,8 +98,8 @@ a {
   border: 1px solid var(--border);
   background: linear-gradient(180deg, rgba(255,255,255,0.01), transparent);
   color: var(--muted);
-  margin-left: 6px;
   text-decoration: none;
+  margin-left: 12px;
 }
 .user-icon svg { display:block; }
 .user-icon:hover { transform: translateY(-2px); color: var(--text); border-color: rgba(96,165,250,0.12); box-shadow: 0 10px 30px rgba(96,165,250,0.06); }
