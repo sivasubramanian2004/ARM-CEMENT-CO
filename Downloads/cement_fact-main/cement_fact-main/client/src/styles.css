@@ -4,7 +4,7 @@
   --bg: #161b22;
   --card: #111827;
   --muted: #94a3b8;
-  --accent: #f59e0b;
+  --accent: #60a5fa;
   --text: #e2e8f0;
   --border: #1f2937;
   --danger: #ef4444;
@@ -39,7 +39,7 @@ a {
 .navbar {
   display: flex;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: space-between;
   gap: 24px;
   padding: 16px 24px;
   background: var(--card);
@@ -55,15 +55,21 @@ a {
   font-weight: 700;
   letter-spacing: 0.5px;
   white-space: nowrap;
-  margin-right: auto;
+  margin-right: 0;
 }
 
 .nav-links {
   display: flex;
   gap: 12px;
   align-items: center;
+}
+
+/* right side wrapper for nav items (links + theme toggle + user icon) */
+.nav-right {
+  display: flex;
+  gap: 12px;
+  align-items: center;
   margin-left: auto;
-  margin-right: 12px;
 }
 
 .nav-links .btn {
@@ -83,8 +89,8 @@ a {
 
 .btn:hover {
   transform: translateY(-1px);
-  border-color: rgba(245, 158, 11, 0.7);
-  box-shadow: 0 10px 30px rgba(245, 158, 11, 0.18);
+  border-color: rgba(96, 165, 250, 0.7);
+  box-shadow: 0 10px 30px rgba(96, 165, 250, 0.18);
 }
 
 /* user icon button in navbar */
@@ -148,11 +154,11 @@ a {
 .card, .product-card {
   box-sizing: border-box;
   border-width: 1px;
-  padding: 12px;
+  padding: 8px;
 }
 
 /* Keep product cards reasonably uniform height for neat alignment */
-.product-card { min-height: 220px; display: flex; }
+.product-card { min-height: 0; display: flex; }
 .product-card .product-meta { flex: 1; display: flex; justify-content: space-between; align-items: flex-start; }
 
 /* Make table containers fill their card and scroll horizontally when needed */
@@ -218,24 +224,24 @@ a {
   background: linear-gradient(180deg, rgba(255,255,255,0.009), transparent), var(--card);
   border: 1px solid var(--border);
   border-radius: 10px;
-  padding: 12px;
+  padding: 8px;
   box-shadow: 0 8px 18px rgba(0,0,0,0.28);
   transition: transform 160ms ease, box-shadow 160ms ease, border-color 160ms ease;
   display: flex;
   flex-direction: row;
-  gap: 12px;
+  gap: 10px;
   align-items: flex-start;
   overflow: hidden;
 }
 .product-card:hover {
   transform: translateY(-6px);
-  border-color: rgba(245, 158, 11, 0.28);
+  border-color: rgba(96, 165, 250, 0.28);
   box-shadow: 0 18px 40px rgba(0,0,0,0.38);
 }
 
 .product-image {
-  width: 140px;
-  height: 140px;
+  width: 120px;
+  height: 120px;
   flex-shrink: 0;
   border-radius: 8px;
   overflow: hidden;
@@ -772,7 +778,7 @@ input, select, textarea {
 .theory-intro { color: #cbd5e1; margin-bottom: 12px; }
 .theory-title { color: var(--accent); margin: 8px 0; font-size: 14px; }
 .keyword { color: #60a5fa; font-weight: 700; }
-.highlight { background: rgba(245,158,11,0.12); color: var(--accent); padding: 2px 6px; border-radius: 6px; font-weight: 700; }
+.highlight { background: rgba(96,165,250,0.12); color: var(--accent); padding: 2px 6px; border-radius: 6px; font-weight: 700; }
 .theory-note { margin-top: 10px; color: var(--muted); font-style: italic; }
 
 /* accordion chevron color */
@@ -796,7 +802,7 @@ input, select, textarea {
 .accordion-header span { transition: color 140ms ease; }
 .accordion-header:hover .chev { color: #60a5fa; }
 
-.info-list strong { color: #f59e0b; }
+.info-list strong { color: var(--accent); }
 .info-list li { color: #cbd5e1; }
 
 .counter-value { color: #7dd3fc; }

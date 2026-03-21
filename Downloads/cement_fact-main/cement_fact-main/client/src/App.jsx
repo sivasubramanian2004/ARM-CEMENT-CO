@@ -46,7 +46,8 @@ export default function App() {
         <nav className="navbar">
         <div className="brand">A.R.M & CO Retails of Cement & Steel</div>
 
-        <div className="nav-links">
+        <div className="nav-right">
+          <div className="nav-links">
           <Link className="btn" to="/">Products</Link>
           <Link className="btn" to="/about">About us</Link>
           {isAuthenticated && (
@@ -60,22 +61,40 @@ export default function App() {
               )}
             </>
           )}
-        </div>
+          </div>
 
-        <button
-          className="btn btn-secondary"
-          title="Toggle theme"
-          onClick={() => setTheme((t) => (t === 'light' ? 'dark' : 'light'))}
-          style={{ marginLeft: 12 }}
-        >
-          {theme === 'light' ? '🌙' : '☀️'}
-        </button>
+          <button
+            className="btn btn-secondary"
+            title="Toggle theme"
+            onClick={() => setTheme((t) => (t === 'light' ? 'dark' : 'light'))}
+          >
+            {theme === 'light' ? (
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" fill="currentColor" />
+              </svg>
+            ) : (
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="12" cy="12" r="4" fill="currentColor" />
+                <g stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">
+                  <path d="M12 2v2" />
+                  <path d="M12 20v2" />
+                  <path d="M4.93 4.93l1.41 1.41" />
+                  <path d="M17.66 17.66l1.41 1.41" />
+                  <path d="M2 12h2" />
+                  <path d="M20 12h2" />
+                  <path d="M4.93 19.07l1.41-1.41" />
+                  <path d="M17.66 6.34l1.41-1.41" />
+                </g>
+              </svg>
+            )}
+          </button>
 
-        <Link className="user-icon" to={isAuthenticated ? '/profile' : '/login'} aria-label="user">
+          <Link className="user-icon" to={isAuthenticated ? '/profile' : '/login'} aria-label="user">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M12 12c2.761 0 5-2.239 5-5s-2.239-5-5-5-5 2.239-5 5 2.239 5 5 5zM3 20c0-3.866 3.582-7 9-7s9 3.134 9 7v1H3v-1z" fill="currentColor" />
           </svg>
         </Link>
+        </div>
         </nav>
       )}
 

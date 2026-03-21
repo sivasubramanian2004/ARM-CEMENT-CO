@@ -29,36 +29,71 @@ export default function ProductsPage() {
     const [qty, setQty] = useState('');
     const [localPlacing, setLocalPlacing] = useState(false);
 
-    // Get unique image for each product based on name and category
+    // Choose varied high-quality images for products.
     function getProductImage() {
       if (product.image) return product.image;
-      
-      // Map specific products to different images
-      const productImageMap = {
-        'JSW': 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=400&h=300&fit=crop',
-        'Ultra Gold': 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=300&fit=crop',
-        'Ramco': 'https://images.unsplash.com/photo-1537981609045-d5cfb2eeb359?w=400&h=300&fit=crop',
-        'Ultratech': 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=300&fit=crop',
-        'Bell': 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=400&h=300&fit=crop',
-        'Asian Paints': 'https://images.unsplash.com/photo-1562259949-e8e7689d7828?w=400&h=300&fit=crop',
-        'Sintex': 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=300&fit=crop',
+
+      // curated image pools per category (Unsplash)
+      const pools = {
+        cement: [
+          'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=640&h=480&auto=format&fit=crop&q=60',
+          'https://images.unsplash.com/photo-1519681393784-d120267933ba?w=640&h=480&auto=format&fit=crop&q=60',
+          'https://images.unsplash.com/photo-1600054825409-2e3f3a1b2f3d?w=640&h=480&auto=format&fit=crop&q=60'
+        ],
+        steel: [
+          'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=640&h=480&auto=format&fit=crop&q=60',
+          'https://images.unsplash.com/photo-1531297484001-80022131f5a1?w=640&h=480&auto=format&fit=crop&q=60'
+        ],
+        tiles: [
+          'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=640&h=480&auto=format&fit=crop&q=60'
+        ],
+        paints: [
+          'https://images.unsplash.com/photo-1562259949-e8e7689d7828?w=640&h=480&auto=format&fit=crop&q=60'
+        ],
+        other: [
+          'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=640&h=480&auto=format&fit=crop&q=60',
+          'https://images.unsplash.com/photo-1503602642458-232111445657?w=640&h=480&auto=format&fit=crop&q=60'
+        ]
       };
-      
-      // Check if product name contains any key
-      for (const [key, url] of Object.entries(productImageMap)) {
-        if (product.name.toUpperCase().includes(key.toUpperCase())) {
-          return url;
-        }
+
+      // Specific product name overrides
+      const specific = {
+        'JSW': pools.steel[0],
+        'RAMCO': pools.cement[0],
+        'ULTRATECH': pools.cement[1] || pools.cement[0],
+        'ULTRA': pools.cement[0],
+        'BELL': pools.tiles[0]
+      };
+
+      const name = (product.name || '').toUpperCase();
+      for (const key of Object.keys(specific)) {
+        if (name.includes(key)) return specific[key];
       }
-      
-      // Category-based fallback
-      const categoryImageMap = {
-        cement: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=300&fit=crop',
-        steel: 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=400&h=300&fit=crop',
-        tiles: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=400&h=300&fit=crop',
-        other: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=300&fit=crop'
-      };
-      return categoryImageMap[product.category] || categoryImageMap.other;
+
+      // choose pool by category
+      const cat = (product.category || 'other').toLowerCase();
+      if (cat === 'cement') {
+        const arr = pools.cement; return arr[hashModulo(product._id, arr.length)];
+      }
+      if (cat === 'steel') {
+        const arr = pools.steel; return arr[hashModulo(product._id, arr.length)];
+      }
+      if (cat === 'tiles') {
+        const arr = pools.tiles; return arr[hashModulo(product._id, arr.length)];
+      }
+      if (cat === 'other') {
+        const arr = pools.other; return arr[hashModulo(product._id, arr.length)];
+      }
+
+      // fallback
+      return pools.other[0];
+    }
+
+    function hashModulo(str, mod) {
+      if (!str) return 0;
+      let h = 0;
+      for (let i = 0; i < str.length; i++) h = (h * 31 + str.charCodeAt(i)) >>> 0;
+      return h % mod;
     }
 
     const total = qty ? (Number(product.price) * Number(qty)).toFixed(2) : '0.00';
